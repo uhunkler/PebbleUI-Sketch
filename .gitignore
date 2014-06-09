@@ -9,6 +9,7 @@ pids
 *.seed
 
 # Exclude local work files
+gulpfile.coffee
 test.js
 index-o.html
 
