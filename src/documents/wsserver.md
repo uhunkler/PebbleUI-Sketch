@@ -29,7 +29,7 @@ The steps to start the WebSocket server are:
 The WebSocket server will be started and the dialogue will show the buttons when opened. If the dialogue has been opened without the WebSocket server running the dialogue can be reloaded to show the buttons after the WebSocket server has been started. The server will log all traffic to the command line.
 
 ## How to install the WebSocket server
-First download the "PebbleUI-Sketch" repository from GitHub and copy the "websocket" folder from the repository folder "Sketch-plugins" into the Sketch plugins folder on the computer. To open the Sketch plugins folder on the computer use the Sketch  menu "Plugins > Reveal plugins folder...".
+First download the [PebbleUI-Sketch](https://github.com/uhunkler/PebbleUI-Sketch) repository from GitHub and copy the "websocket" folder from the repository folder "Sketch-plugins" into the Sketch plugins folder on the computer. To open the Sketch plugins folder on the computer use the Sketch  menu "Plugins > Reveal plugins folder...".
 
 The WebSocket server is based on Node.js. Node.js must be installed on the local computer. If Node.js is not installed the recommended way to install Node.js is to download it from the [Node.js website](http://nodejs.org) and run the installer.
 

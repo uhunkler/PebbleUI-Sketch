@@ -32,4 +32,4 @@ During the work on clock faces it is important to see the hands for different ti
 To set the time in the "Pebble UI" template select the "[hands]" layer group, enter the time in the dialogue and click on the "Set" button.
 
 ## How to install the plugin "pebble-dialogue"
-Download the "PebbleUI-Sketch" repository from GitHub and copy the "pebble-dialogue" and the "lib" folder from the repository folder "Sketch-plugins" into the Sketch plugins folder on the computer. To open the Sketch 3 plugins folder on the computer use the Sketch menu "Plugins > Reveal plugins folder...".
+Download the [PebbleUI-Sketch](https://github.com/uhunkler/PebbleUI-Sketch) repository from GitHub and copy the "pebble-dialogue" and the "lib" folder from the repository folder "Sketch-plugins" into the Sketch plugins folder on the computer. To open the Sketch 3 plugins folder on the computer use the Sketch menu "Plugins > Reveal plugins folder...".

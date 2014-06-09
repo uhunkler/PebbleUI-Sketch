@@ -360,6 +360,7 @@ h3.content-subhead {
 .header .date-stamp {
   color: #aaaaaa;
   font-size: 0.9em;
+  font-style: italic;
   margin-top: .5em;
   text-align: left;
 }

@@ -29,4 +29,4 @@ The template includes font information about the Pebble UI fonts and font altern
 <section data-type="end"/>
 
 ## How to install the "Pebble UI.sketch" file as a template
-Download the "pebble-dialogue" repository from GitHub and open the "Pebble UI.sketch" file in Sketch 3. Then use the menu "File > Save as Template..." to save the "Pebble UI" as a template.
+Download the [PebbleUI-Sketch](https://github.com/uhunkler/PebbleUI-Sketch) repository from GitHub and open the "Pebble UI.sketch" file in Sketch 3. Then use the menu "File > Save as Template..." to save the "Pebble UI" as a template.
