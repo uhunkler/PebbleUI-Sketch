@@ -29,10 +29,10 @@ The steps to start the WebSocket server are:
 The WebSocket server will be started and the dialogue will show the buttons when opened. If the dialogue has been opened without the WebSocket server running the dialogue can be reloaded to show the buttons after the WebSocket server has been started. The server will log all traffic to the command line.
 
 ## How to install the WebSocket server
-First download the "pebble-dialogue" repository from GitHub and copy the "websocket" folder into the Sketch plugins folder. To open the Sketch plugins folder on the computer use the Sketch  menu "Plugins > Reveal plugins folder...".
+First download the "PebbleUI-Sketch" repository from GitHub and copy the "websocket" folder from the repository folder "Sketch-plugins" into the Sketch plugins folder on the computer. To open the Sketch plugins folder on the computer use the Sketch  menu "Plugins > Reveal plugins folder...".
 
 The WebSocket server is based on Node.js. Node.js must be installed on the local computer. If Node.js is not installed the recommended way to install Node.js is to download it from the [Node.js website](http://nodejs.org) and run the installer.
 
-When Node.js is installed the "nodejs-websocket" module needs to be download - it is not included in the Sketch "websocket" plugin folder. To download and install the "nodejs-websocket" module with the terminal change directory into the "websocket" plugin folder and type the command "npm install". That's all.
+When Node.js is installed the "nodejs-websocket" module needs to be downloaded - it is not included in the Sketch "websocket" plugin folder. The "nodejs-websocket" module will be installed with the terminal. Open the terminal, change directory into the "websocket" plugin folder and type the command "npm install". That's all - the Node Package Manager will download the module and place it into the "node_modules" folder.
 
 When the module is installed the WebSocket server can be started. ([See above](#how-to-start-the-node-js-websocket-server)).
