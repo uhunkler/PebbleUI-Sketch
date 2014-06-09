@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Pebble UI template and plugin for Bohemian Coding Sketch.">
+
+  <title>
+    The Sketch 3 plugin "pebble-dialogue" - Sketch template and plugin for the Pebble UI
+  </title>
+
+  <link rel="stylesheet" href="../css/pure-min.css">
+  <link rel="stylesheet" href="../css/grids-responsive-min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading" href="../index.html">Sketch<br>Pebble UI</a>
+
+        <ul>
+          <li class="p0-p1">
+            <a href="../index.html">Pebble UI</a>
+          </li>
+
+          <li class="menu-item-divided pure-menu-selected">
+            <a href="../pages/sketchplugin.html">Sketch plugin</a>
+          </li>
+
+          <li class="p2-p1">
+            <a href="../pages/wsserver.html">WebSocket server</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1>The Sketch 3 plugin "pebble-dialogue"</h1>
+        <h2>A plugin with a dialogue to support the work on Pebble clock faces.</h2>
+        <p class="date-stamp">Last edited 2014-06-09</p>
+      </div>
+
+      <div class="content">
+
+        <h1 class="content-subhead" id="the-sketch-3-plugin-pebble-dialogue-">The Sketch 3 plugin &quot;pebble-dialogue&quot;</h1>
+<p>The Sketch &quot;pebble-dialogue&quot; plugin offers tools to work with layer rotation and with time settings. The values for the different operations are entered in a dialogue which contains forms on two switchable &quot;pages&quot;. </p>
+<p>The dialogue can be opened from the Sketch menu &quot;Plugins &gt; pebble-dialogue &gt; open-panel&quot;. The buttons in the dialogue are shown when the WebSocket server is running. (<a href="./wsserver.html#how-to-start-the-node-js-websocket-server">Start the Websocket Server</a>)</p>
+<h2 class="content-subhead" id="rotation">Rotation</h2>
+<p><img class="pure-img-responsive" src="../assets/sketch-pebble-UI-with-rotate-dialogue.jpg" alt="Sketch Pebble UI with rotate dialogue"></p>
+<p>To support the work with object rotation for clock faces the plugin dialogue offers to set an angle and rotate 1 layer around another layer (the center).</p>
+<p>To support the creation of the periphery sections of the clock dial the dialogue offers to copy and rotate a layer around another layer (the center). In a field list the name of each copied layer and the rotation angle can be set. With the &quot;Duplicate&quot; button all defined duplicates are created in a sequence.</p>
+<h3 class="content-subhead" id="rotate-the-minute-hand">Rotate the minute hand</h3>
+<p>To change the position of the minute hand for example select the layer &quot;minutes [minutehand]&quot; <strong>and</strong> the layer &quot;center [center]&quot; in the Sketch file. The minute hand will be rotated around the center. Then enter the rotation angle in the dialogue and click on the &quot;Rotate&quot; button.</p>
+<h3 class="content-subhead" id="duplicate-the-periphery-marks">Duplicate the periphery marks</h3>
+<p>To duplicate the 5 minute marks of the clock dial select the layer with the first mark at 12 o&#39;clock <strong>and</strong> the layer &quot;center [center]&quot; in the Sketch file. Then enter the <strong>name</strong> and the rotation <strong>angle</strong> for each copied and rotated mark in the dialogue. To change the number of copies the value rows in the dialogue can be removed or added as needed - click on the &quot;+&quot; button to add rows and on the &quot;-&quot; button to remove rows. Rows with an empty field will also be excluded in the process.</p>
+<h2 class="content-subhead" id="time">Time</h2>
+<p><img class="pure-img-responsive" src="../assets/sketch-pebble-UI-with-time-dialogue.jpg" alt="Sketch Pebble UI with time dialogue"></p>
+<p>During the work on clock faces it is important to see the hands for different times. In the plugin dialogue the time can be set. Or a specified time can be added to the displayed time. With a click on the &quot;Run&quot; button the clock time changes every second - the time value set in the &quot;Add some time&quot; field is added to the actual time. The hands <strong>move</strong> in the Sketch layout.</p>
+<h3 class="content-subhead" id="set-the-time">Set the time</h3>
+<p>To set the time in the &quot;Pebble UI&quot; template select the &quot;[hands]&quot; layer group, enter the time in the dialogue and click on the &quot;Set&quot; button.</p>
+<h2 class="content-subhead" id="how-to-install-the-plugin-pebble-dialogue-">How to install the plugin &quot;pebble-dialogue&quot;</h2>
+<p>Download the &quot;pebble-dialogue&quot; repository from GitHub and copy the &quot;pebble-dialogue&quot; folder into the Sketch plugins folder. To open the Sketch 3 plugins folder on the computer use the Sketch menu &quot;Plugins &gt; Reveal plugins folder...&quot;.</p>
+
+
+      </div>
+
+      <footer>
+        <div class="pure-g">
+          <div class="left pure-u-1 pure-u-sm-1-2">
+            <p>
+              This project is maintained by <a href="https://github.com/uhunkler">uhunkler</a><br>
+              This site is built using <a href="https://github.com/yui/pure">Pure CSS</a> and <br>hosted on GitHub Pages
+            </p>
+          </div>
+
+          <div class="right pure-u-1 pure-u-sm-1-2">
+            <p>
+              <a href="https://github.com/uhunkler/PebbleUI-Sketch">GitHub Project</a><br>
+              © 2014 unodo All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../js/ui.js"></script>
+  </div>
+</body>
+
+</html>

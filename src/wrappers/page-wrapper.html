@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Pebble UI template and plugin for Bohemian Coding Sketch.">
+
+  <title>
+    <%=data.file.frontMatter.title%> - <%=data.claim%>
+  </title>
+
+  <link rel="stylesheet" href="<%= data.file.frontMatter.level %>css/pure-min.css">
+  <link rel="stylesheet" href="<%= data.file.frontMatter.level %>css/grids-responsive-min.css">
+  <link rel="stylesheet" href="<%= data.file.frontMatter.level %>css/styles.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading" href="<%=data.file.frontMatter.level%>index.html">Sketch<br/>Pebble UI</a>
+
+        <ul>
+          <li class="p0-<%=data.file.frontMatter.page%>">
+            <a href="<%=data.file.frontMatter.level%>index.html">Pebble UI</a>
+          </li>
+
+          <li class="p1-<%=data.file.frontMatter.page%>">
+            <a href="<%=data.file.frontMatter.level%>pages/sketchplugin.html">Sketch plugin</a>
+          </li>
+
+          <li class="p2-<%=data.file.frontMatter.page%>">
+            <a href="<%=data.file.frontMatter.level%>pages/wsserver.html">WebSocket server</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1><%=data.file.frontMatter.title%></h1>
+        <h2><%=data.file.frontMatter.subtitle%></h2>
+        <p class="date-stamp">Last edited <%=data.file.unodo.date%></p>
+      </div>
+
+      <div class="content">
+
+        <%=data.contents%>
+
+      </div>
+
+      <footer>
+        <div class="pure-g">
+          <div class="left pure-u-1 pure-u-sm-1-2">
+            <p>
+              This project is maintained by <a href="https://github.com/uhunkler">uhunkler</a><br />
+              This site is built using <a href="https://github.com/yui/pure">Pure CSS</a> and <br />hosted on GitHub Pages
+            </p>
+          </div>
+
+          <div class="right pure-u-1 pure-u-sm-1-2">
+            <p>
+              <a href="https://github.com/uhunkler/PebbleUI-Sketch">GitHub Project</a><br />
+              © 2014 unodo All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="<%=data.file.frontMatter.level%>js/ui.js"></script>
+  </div>
+</body>
+
+</html>

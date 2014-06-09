@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Pebble UI template and plugin for Bohemian Coding Sketch.">
+
+  <title>
+    The WebSocket Server - Sketch template and plugin for the Pebble UI
+  </title>
+
+  <link rel="stylesheet" href="../css/pure-min.css">
+  <link rel="stylesheet" href="../css/grids-responsive-min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading" href="../index.html">Sketch<br>Pebble UI</a>
+
+        <ul>
+          <li class="p0-p2">
+            <a href="../index.html">Pebble UI</a>
+          </li>
+
+          <li class="p1-p2">
+            <a href="../pages/sketchplugin.html">Sketch plugin</a>
+          </li>
+
+          <li class="menu-item-divided pure-menu-selected">
+            <a href="../pages/wsserver.html">WebSocket server</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1>The WebSocket Server</h1>
+        <h2>Make buttons on the "pebble-dialogue" in the WebView work.</h2>
+        <p class="date-stamp">Last edited 2014-06-09</p>
+      </div>
+
+      <div class="content">
+
+        <h1 class="content-subhead" id="the-websocket-server">The WebSocket Server</h1>
+<h2 class="content-subhead" id="some-background">Some background</h2>
+<p>Sketch plugins don&#39;t run continuously. When a Sketch plugin is started it <strong>can</strong> execute JavaScript functions in a dialogue in a WebView and <strong>can</strong> work with the values it retrieves from the dialogue. But it <strong>can&#39;t</strong> react on button clicks in the dialogue.</p>
+<h2 class="content-subhead" id="make-the-dialogue-interactive-with-buttons">Make the dialogue interactive with buttons</h2>
+<p>To get buttons in the dialogue trigger actions the click event must start a Sketch CocoasScript. &quot;<strong>WebSocket</strong> is a protocol providing full-duplex communications channels over a single TCP connection.&quot; (<a href="http://en.wikipedia.org/wiki/Websocket">WebSocket Wikipedia.org</a>) Which means a web page can establish a consistent communication channel with a server. </p>
+<p>The dialogue in the WebView in Sketch is a web page and therefore can communicate with a WebSocket server running on the same computer as Sketch. Such a simple WebSocket server based on Node.js is added to the package. When the server runs the dialogue connects to that WebSocket server. Only when the connection is established the buttons are shown in the dialogue. Without a WebSocket connection no buttons are visible and the scripts need to be called from the Sketch plugin menu.</p>
+<p>A message is sent from the dialogue via the WebSocket to the WebSocket server when a button is clicked. The WebSocket server calls the Sketch CocoaScript which is connected to the message. The Sketch script runs as if it would have been called from the plugin menu. The WebSocket server establishes a &quot;back channel&quot; between the dialogue and Sketch to trigger prepared CocoaScripts.</p>
+<h2 class="content-subhead" id="how-to-start-the-node-js-websocket-server">How to start the Node.js WebSocket server</h2>
+<p>The server is started via a command line command and keeps running until it is canceled on the command line. To make it easy to start the server the Sketch plugin menu &quot;Plugins &gt; websocket &gt; webservice-starting-information&quot; shows the CLI command and writes it into the computer pastebin from where it can be pasted into the terminal window.</p>
+<p>The steps to start the WebSocket server are: </p>
+<ul>
+<li>open a terminal</li>
+<li>run the Sketch menu item</li>
+<li>paste the CLI command into the terminal window</li>
+<li>hit return</li>
+</ul>
+<p>The WebSocket server will be started and the dialogue will show the buttons when opened. If the dialogue has been opened without the WebSocket server running the dialogue can be reloaded to show the buttons after the WebSocket server has been started. The server will log all traffic to the command line.</p>
+<h2 class="content-subhead" id="how-to-install-the-websocket-server">How to install the WebSocket server</h2>
+<p>First download the &quot;pebble-dialogue&quot; repository from GitHub and copy the &quot;websocket&quot; folder into the Sketch plugins folder. To open the Sketch plugins folder on the computer use the Sketch  menu &quot;Plugins &gt; Reveal plugins folder...&quot;.</p>
+<p>The WebSocket server is based on Node.js. Node.js must be installed on the local computer. If Node.js is not installed the recommended way to install Node.js is to download it from the <a href="http://nodejs.org">Node.js website</a> and run the installer.</p>
+<p>When Node.js is installed the &quot;nodejs-websocket&quot; module needs to be download - it is not included in the Sketch &quot;websocket&quot; plugin folder. To download and install the &quot;nodejs-websocket&quot; module with the terminal change directory into the &quot;websocket&quot; plugin folder and type the command &quot;npm install&quot;. That&#39;s all.</p>
+<p>When the module is installed the WebSocket server can be started. (<a href="#how-to-start-the-node-js-websocket-server">See above</a>).</p>
+
+
+      </div>
+
+      <footer>
+        <div class="pure-g">
+          <div class="left pure-u-1 pure-u-sm-1-2">
+            <p>
+              This project is maintained by <a href="https://github.com/uhunkler">uhunkler</a><br>
+              This site is built using <a href="https://github.com/yui/pure">Pure CSS</a> and <br>hosted on GitHub Pages
+            </p>
+          </div>
+
+          <div class="right pure-u-1 pure-u-sm-1-2">
+            <p>
+              <a href="https://github.com/uhunkler/PebbleUI-Sketch">GitHub Project</a><br>
+              © 2014 unodo All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../js/ui.js"></script>
+  </div>
+</body>
+
+</html>
