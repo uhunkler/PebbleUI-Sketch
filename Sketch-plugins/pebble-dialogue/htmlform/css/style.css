@@ -1,0 +1,116 @@
+/*
+ * Modular scale 4:5 major third
+ * http://modularscale.com/scale/?px1=16&px2=&ra1=1.25&ra2=0
+ */
+body {
+  margin: .7em;
+  font-size: 13px;
+  line-height: 1.4;
+}
+h1 {
+  font-size: 1.563em;
+  font-weight: bold;
+}
+h3 {
+  font-size: 1em;
+  font-weight: bold;
+}
+br.clear {
+  clear: both;
+}
+#formrow {
+  display: none;
+}
+#page-wrapper {
+  margin-bottom: 1em;
+}
+.page {
+  overflow: hidden;
+  height: auto;
+  -webkit-transition: all 0.4s ease-in-out;
+}
+.page > .wrap {
+  overflow: hidden;
+}
+.wrap > h3 {
+  margin-bottom: .3em;
+}
+form + h3 {
+  margin-top: 2em;
+  margin-bottom: .3em;
+}
+.hidden {
+  display: none;
+}
+.collapsed {
+  height: 0px;
+}
+.pure-form fieldset {
+  padding: 0;
+}
+#fields {
+  margin-top: 1em;
+}
+#fields td,
+#fields th {
+  padding: .2em .5em;
+}
+#fields .name input {
+  width: 10em;
+}
+#fields .angle input {
+  width: 5em;
+}
+#fields .edit button {
+  width: 2.5em;
+}
+#time-buttons {
+  margin-top: 1em;
+}
+#rotateform.pure-form-aligned .pure-control-group label {
+  float: left;
+  width: auto;
+  padding-top: .5em;
+}
+#rotateform.pure-form-aligned .pure-control-group input[type=text] {
+  width: 10em;
+  float: left;
+}
+#rotateform #rotate-btn {
+  margin-left: 1em;
+}
+#thetimeform.pure-form-aligned .pure-control-group label {
+  float: left;
+  width: auto;
+  padding-top: .5em;
+}
+#thetimeform.pure-form-aligned .pure-control-group input[type=text] {
+  width: 10em;
+  float: left;
+}
+#thetimeform #settime-btn,
+#thetimeform #addtime-btn {
+  margin-left: 1em;
+}
+#thetimeform #runclock-btn {
+  clear: both;
+}
+.pure-button-secondary {
+  background: rgb(66, 184, 221);
+  /* this is a light blue */
+}
+.pure-button-success {
+  background: rgb(28, 184, 65);
+  /* this is a green */
+}
+.pure-button-warning {
+  background: rgb(223, 117, 20);
+  /* this is an orange */
+}
+.pure-button-error {
+  background: rgb(202, 60, 60);
+  /* this is a maroon */
+}
+#calculate {
+  margin: 1em 0;
+}

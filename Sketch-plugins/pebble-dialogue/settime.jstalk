@@ -1,0 +1,232 @@
+/**
+ * Set the time.
+ */
+
+// Include additional frameworks.
+framework('WebKit');
+framework('AppKit');
+
+// Import the persistence handler.
+#import 'lib/persistence.js'
+#import 'lib/functional.js'
+#import 'lib/rotation.js'
+
+// Set up the script variables / functions
+var app = NSApplication.sharedApplication(),
+  msg,
+  panel,
+  webView,
+  msg,
+  jscode = '',
+  js = '',
+  wrapjs = function (jsstring) {
+    return 'try {[[js]]} catch (e) {e.toString();}'.replace('[[js]]', jsstring);
+  };
+
+var doScript = function (callFunction) {
+  // Get the windowScriptObject as the scripting connector
+  var scriptObject = webView.windowScriptObject(),
+    result = '';
+
+  // Get the grid as a query string
+  jscode = callFunction;
+  js = wrapjs(jscode);
+  result = scriptObject.evaluateWebScript(js);
+
+  return result;
+};
+
+/**
+ * Rotate to a given minute. The minute is converted to an angle.
+ *
+ * @param {MSLayer} centerObj   The center object
+ * @param {MSLayer} obj   The rotated object
+ * @param {int} minutes   The minutes
+ */
+var rotateToMinute = function(centerObj, obj, minutes) {
+  rotateToAngle(centerObj, obj, (360 * (minutes % 60) / 60));
+};
+
+/**
+ * Rotate to a given hour. The hour + minutes are converted to an angle.
+ *
+ * @param {MSLayer} centerObj   The center object
+ * @param {MSLayer} obj   The rotated object
+ * @param {int} minutes   The minutes
+ */
+var rotateToHour = function(centerObj, obj, hour, minutes) {
+  rotateToAngle(centerObj, obj, (360 * ((hour % 12) / 12) +
+    (30 * (minutes % 60) / 60)));
+};
+
+/**
+ * Get the hour, minutes and seconds from a time string.
+ * The time may be given as numbers seperated by not numbers
+ * like "01:15:32" or "1:12" or "3"
+ * or "1,25,33" or "3 23 1" or "1-2-3"
+ *
+ * @param {string} time   The time string
+ */
+var getTimeFromTimeString = function(time) {
+  var hour = 0,
+    min = 0,
+    sec = 0,
+    result = [];
+
+  // Split the time string with a regex
+  result = time.match(/(\d{1,2})\D*(?:(\d{1,2})|.*)\D*(?:(\d{1,2})|.*)/);
+
+  // Set the time components from the result array
+  if (result) {
+    if (result[3] !== undefined) {
+      sec = parseInt(result[3], 10);
+    }
+    if (result[2] !== undefined) {
+      min = parseInt(result[2], 10);
+    }
+    if (result[1] !== undefined) {
+      hour = parseInt(result[1], 10);
+    }
+  }
+
+  return ({
+    'hour': hour,
+    'min': min,
+    'sec': sec
+  });
+};
+
+/**
+ * Set the clock to the new time
+ * @param {array} collection   Hands collection
+ * @param {string} timeString   The new time
+ */
+var setClock = function(collection, timeString) {
+  var timeObj = getTimeFromTimeString(timeString),
+    centerObject,
+    hourHand,
+    minuteHand,
+    secondHand;
+
+  // Prepare the center and hand objects
+  centerObj = _.find(collection, function(item) {
+    return item.name().indexOf('[center]') !== -1;
+  });
+  hourHand = _.find(collection, function(item) {
+    return item.name().indexOf('[hourhand]') !== -1;
+  });
+  minuteHand = _.find(collection, function(item) {
+    return item.name().indexOf('[minutehand]') !== -1;
+  });
+  secondHand = _.find(collection, function(item) {
+    return item.name().indexOf('[secondhand]') !== -1;
+  });
+  timeStr = _.find(collection, function(item) {
+    return item.name().indexOf('[time]') !== -1;
+  });
+
+  // If no center is in the collection log a message and return
+  if (!centerObj) {
+    log('No center in collection. Please include an object with [center]' +
+      ' in its name.');
+    return false;
+  }
+
+  // Rotate the hands
+  if (hourHand) {
+    rotateToHour(centerObj, hourHand, timeObj.hour, timeObj.min);
+  }
+  if (minuteHand) {
+    rotateToMinute(centerObj, minuteHand, timeObj.min);
+  }
+  if (secondHand) {
+    rotateToMinute(centerObj, secondHand, timeObj.sec);
+  }
+  if (timeStr) {
+    timeStr.setStringValue(timeObj.hour + ':' + timeObj.min + ':' + timeObj.sec);
+  }
+};
+
+/**
+ * Read the time string saved in the text layer "[time]"
+ *
+ * @param {array} collection   Layer collection from the "[hands]" group
+ * @return {string}   The retrieved timestring
+ */
+var readSavedTimeString = function(collection) {
+  result = '';
+
+  var timeStr = _.find(collection, function(item) {
+    return item.name().indexOf('[time]') !== -1;
+  });
+
+  if (timeStr) {
+    result = "" + timeStr.stringValue();
+  }
+
+  return result;
+};
+
+/**
+ * Anonymous function holds the code (the "main" function).
+ * Is run automatically.
+ *
+ * @return {mixed}   The return code
+ */
+(function main() {
+  var page = doc.currentPage();
+
+  panel = persist.get('HTMLformPanel');
+  webView = persist.get('HTMLformWebView');
+
+  // If the panel does not exisit (null is returned from persist.get),
+  // set the panel up and show it.
+  // Else make the panel the front window and run the JavaScript functions.
+  if (panel === null) {
+    msg = 'Please open the Panel first.';
+    log(msg);
+    app.displayDialog_withTitle(msg, 'Information');
+  } else {
+    // Show the panel if it is not the key window
+    if (!panel.isKeyWindow()) {
+      panel.makeKeyAndOrderFront(panel);
+      doScript("de.unodo.changePage('time-btn');");
+      return;
+    }
+
+    if (selection.count() < 1) {
+      msg = "Please select the group with the watchface.";
+      log(msg);
+      return;
+    }
+
+    // Locate the hands in the page
+    var layers = _.a(selection[0].children());
+    var handsGroup = _.find(layers, function(item) {
+      return item.name().indexOf('[hands]') !== -1;
+    });
+    if (!handsGroup) {
+      msg ='No group named "[hands]" found. ' +
+        'Please group the center and the hands and name the group "[hands]".';
+      log(msg);
+      return;
+    }
+
+    var objects = _.a(handsGroup.layers());
+    if (!objects) {
+      return;
+    }
+
+    // Get the saved timestring
+    var timestring = doScript('de.unodo.returnSetTime();');
+
+    if (!timestring) {
+      log(timestring);
+      return;
+    }
+
+    setClock(objects, timestring);
+
+    log('Time set.');
+  }
+}());

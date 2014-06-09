@@ -1,0 +1,85 @@
+/**
+ * Rotate the selected element around the angle read form the dialogue.
+ */
+
+// Include additionl frameworks.
+framework('WebKit');
+framework('AppKit');
+
+// Import the persistence handler.
+#import 'lib/persistence.js'
+#import 'lib/rotation.js'
+
+// Set up the script variables / functions
+var app = NSApplication.sharedApplication(),
+  msg,
+  panel,
+  webView,
+  jscode = '',
+  js = '',
+  wrapjs = function (jsstring) {
+    return 'try {[[js]]} catch (e) {e.toString();}'.replace('[[js]]', jsstring);
+  };
+
+var doScript = function (callFunction) {
+  // Get the windowScriptObject as the scripting connector
+  var scriptObject = webView.windowScriptObject(),
+    result = '';
+
+  // Get the grid as a query string
+  jscode = callFunction;
+  js = wrapjs(jscode);
+  result = scriptObject.evaluateWebScript(js);
+
+  return result;
+};
+
+/**
+ * The "main" function holds the code.
+ *
+ * @return {mixed}   The return value, mostly true | false
+ */
+(function main () {
+  var centerLayer,
+    objectLayer;
+
+  panel = persist.get('HTMLformPanel');
+  webView = persist.get('HTMLformWebView');
+
+  // If the panel does not exisit (null is returned from persist.get),
+  // set the panel up and show it.
+  // Else make the panel the front window and run the JavaScript functions.
+  if (panel === null) {
+    msg = 'Please open the Panel first.';
+    log(msg);
+    app.displayDialog_withTitle(msg, 'Information');
+  } else {
+    // Show the panel if it is not the key window
+    if (!panel.isKeyWindow()) {
+      panel.makeKeyAndOrderFront(panel);
+      doScript("de.unodo.changePage('rotator-btn');");
+      return;
+    }
+
+    if (selection.count() < 2) {
+      log("Please select two elements.");
+      return;
+    }
+
+    // Run the script
+    var angle = doScript('de.unodo.returnRotateAngle();');
+
+    // Get the center and the second selected layer as the processed object
+    if (selection[0].name().indexOf('[center]') !== -1) {
+      centerLayer = selection[0];
+      objectLayer = selection[1];
+    } else {
+      centerLayer = selection[1];
+      objectLayer = selection[0];
+    }
+
+    rotateWithAngle(centerLayer, objectLayer, angle);
+
+    log('Element rotated.');
+  }
+}());

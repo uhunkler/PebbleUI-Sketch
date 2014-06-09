@@ -1,0 +1,97 @@
+// HTMLform (shift alt ctrl cmd p)
+
+/**
+ * The first script call creates the panel with the saved HTML page.
+ * The following script calls execute the JavaScript calls in the webView.
+ */
+
+// Include additionl frameworks.
+framework('WebKit');
+framework('AppKit');
+
+// Import the persistence handler.
+#import 'lib/persistence.js'
+
+/**
+ * Configuration
+ *
+ * @type {Object} THe config settings
+ */
+var config = {
+  // The webview position: left, bottom, width, height
+  fleft: 0,
+  fbottom: 0,
+  fwidth: 290,
+  fheight: 720,
+  url: ''
+}
+
+// Set up the script variables / functions
+var scriptpath,
+  panel,
+  webView;
+
+// Set the url to the saved webpage.
+// Split the scriptpath into an array, remove last item which is
+// the script name, create a string from the array again and wrap the
+// path with 'file://' and the html file name.
+scriptpath = sketch.scriptPath.split('/');
+
+scriptpath.pop();
+scriptpath = scriptpath.join('/') + '/';
+config.url = encodeURI('file://' + scriptpath + 'htmlform/pebble-dialogue.html');
+
+
+/**
+ * Prepare the panel, show it and save it into the persistent store.
+ */
+var setupWebViewPanel = function () {
+  // Prepare the panel:
+  // Set the panel size and
+  // initialize the webview and load the URL
+  var frame = NSMakeRect(config.fleft, config.fbottom,
+    config.fwidth, config.fheight);
+  var webView = WebView.alloc().initWithFrame(frame);
+  var webViewFrame = webView.mainFrame();
+
+  // Set the HTML page url
+  webView.setMainFrameURL(config.url);
+
+  // Set up the panel window
+  var mask = NSTitledWindowMask + NSClosableWindowMask +
+    NSMiniaturizableWindowMask + NSUtilityWindowMask;
+    // NSMiniaturizableWindowMask + NSResizableWindowMask + NSUtilityWindowMask;
+  var panel = NSPanel.alloc()
+    .initWithContentRect_styleMask_backing_defer(frame, mask, NSBackingStoreBuffered, true);
+
+  // Add the webView to the prepared panel
+  panel.contentView().addSubview(webView);
+
+  // Show the panel
+  panel.makeKeyAndOrderFront(panel);
+
+  // persist the panel and the webView.
+  persist.set('HTMLformPanel', panel);
+  persist.set('HTMLformWebView', webView);
+};
+
+/**
+ * The "main" function holds the code.
+ *
+ * @return {mixed}   The return value, mostly true | false
+ */
+(function main () {
+  panel = persist.get('HTMLformPanel');
+  webView = persist.get('HTMLformWebView');
+
+  // If the panel does not exisit (null is returned from persist.get),
+  // set the panel up and show it.
+  // Else make the panel the front window and run the JavaScript functions.
+  if (panel === null) {
+    log('setupWebViewPanel');
+    setupWebViewPanel();
+  } else {
+    // Show the panel
+    panel.makeKeyAndOrderFront(panel);
+  }
+}());

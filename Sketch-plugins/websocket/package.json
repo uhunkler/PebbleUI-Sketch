@@ -1,0 +1,36 @@
+{
+  "name": "websocket",
+  "description": "A websocket server to support a back channel for HTML forms in Sketch dialogues.",
+  "version": "0.1.0",
+  "homepage": "",
+  "author": {
+    "name": "Urs Hunkler",
+    "email": "urs.hunkler@unodo.de"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": ""
+    }
+  ],
+  "main": "",
+  "engines": {
+    "node": ">= 0.9.0"
+  },
+  "keywords": [
+    "Sketch",
+    "CocoaScript",
+    "WebSocket",
+    "scripting",
+    "plugin",
+    "node.js"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "nodejs-websocket": "^0.1.5"
+  }
+}

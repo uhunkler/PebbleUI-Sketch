@@ -1,0 +1,56 @@
+/**
+ * Get the actually running Sketch Application name - it could be
+ * Sketch or a beta version with a different name. This script assues
+ * that it is called from Sketch so that Sketch is the frontmost application.
+ * @return {string}   The Sketch Application name
+ */
+var getNameOfRunningApp = function () {
+  var workspace = [NSWorkspace sharedWorkspace],
+    frontmost = [[NSWorkspace sharedWorkspace] frontmostApplication],
+    bundleIdentifier = [frontmost bundleIdentifier],
+    path = [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier:bundleIdentifier],
+    appName = [[path lastPathComponent] stringByDeletingPathExtension];
+
+    return appName;
+};
+
+/**
+ * Copy a string to the general pasteboard
+ * @param {string} s   The string to copy
+ */
+var copyToPasteboard = function(s) {
+  // Get the general pasteboard
+  var pasteBoard = NSPasteboard.generalPasteboard();
+
+  // tell it we're going to be putting a single string type on the pasteboard
+  pasteBoard.declareTypes_owner([NSPasteboardTypeString], null);
+
+  // and then put it on
+  pasteBoard.setString_forType(s, NSPasteboardTypeString);
+};
+
+/**
+ * The main function, holds the code.
+ * Is run automatically.
+ *
+ * @return {mixed}   The return value, mostly true | false
+ */
+(function main () {
+  var app = NSApplication.sharedApplication(),
+    appname = getNameOfRunningApp(),
+    path = sketch.scriptPath.substr(0, sketch.scriptPath.lastIndexOf('/')),
+    cliCommand = "cd '" + path + "'; node ws2coscript-server.js " + appname,
+    msgTitle;
+
+  copyToPasteboard(cliCommand);
+
+  msgTitle = 'The CLI comand to start the webservice server. ' +
+    'The command has been copied to the clipboard.\n' +
+    'Paste it in a terminal winodow, hit return and let the terminal window open.';
+
+  app.displayDialog_withTitle(cliCommand, msgTitle);
+
+  // log(cliCommand);
+
+  return 'Done';
+}());

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Duplicate and rotate form</title>
+  <link rel="stylesheet" href="css/pure-min.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="css/style.css" media="screen" charset="utf-8">
+</head>
+
+<body>
+  <header id="header">
+    <h1>Pebble Dialogue</h1>
+
+    <div id="switcher">
+      <button id="rotator-btn" class="pure-button">Rotator</button>
+      <button id="time-btn" class="pure-button">Time</button>
+    </div>
+  </header>
+
+  <section id="page-wrapper">
+    <section id="generate" class="page">
+      <div class="wrap">
+
+        <h3>Rotate the selected element around the selected center.</h3>
+        <form id="rotateform" class="pure-form pure-form-aligned">
+          <fieldset>
+            <div class="pure-control-group">
+              <label for="rotangle">Angle</label>
+              <input id="rotangle" type="text" name="rotangle">
+            </div>
+            <button type="button" id="rotate-btn" class="hidden pure-button pure-button-primary">
+              Rotate
+            </button>
+          </fieldset>
+        </form>
+
+        <h3>Duplicate and rotate the selected element around the selected center.</h3>
+        <form id="theform" class="pure-form">
+          <fieldset>
+            <legend>Enter the values for the duplicated element's <strong>name</strong>
+              and the <strong>angle</strong>. Rows with an empty field will be excluded.
+              <br/>
+              <br/>Use the "-" button to remove a row and the "+" button to add a row.
+            </legend>
+
+            <table id="fields" class="pure-table pure-table-horizontal">
+              <thead>
+                <tr id="header">
+                  <th class="name">Name</th>
+                  <th class="angle">Angle</th>
+                  <th class="edit">Edit</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr id="row1">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name1" value="5min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle1" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="remove1" data-type="remove" class="pure-button pure-button-warning">-</button>
+                  </td>
+                </tr>
+                <tr id="row2">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name2" value="10min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle2" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="remove2" data-type="remove" class="remove pure-button pure-button-warning">-</button>
+                  </td>
+                </tr>
+                <tr id="row3">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name3" value="15min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle3" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="remove3" data-type="remove" class="remove pure-button pure-button-warning">-</button>
+                  </td>
+                </tr>
+                <tr id="row4">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name4" value="20min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle4" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="remove4" data-type="remove" class="pure-button pure-button-warning">-</button>
+                  </td>
+                </tr>
+                <tr id="row5">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name5" value="25min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle5" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="remove5" data-type="remove" class="pure-button pure-button-warning">-</button>
+                  </td>
+                </tr>
+                <tr id="row6">
+                  <td class="name">
+                    <input type="text" data-type="name" name="name6" value="30min">
+                  </td>
+                  <td class="angle">
+                    <input type="text" data-type="angle" name="angle6" value="30">
+                  </td>
+                  <td class="edit">
+                    <button type="button" id="add6" data-type="add" class="pure-button pure-button-secondary">+</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div id="buttons" class="hidden">
+              <button type="button" id="calculate" class="pure-button pure-button-primary">
+                Duplicate
+              </button>
+
+              <button type="button" id="undo" class="pure-button">
+                Undo
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        
+      </div>
+    </section>
+
+    <section id="time" class="page collapsed">
+      <div class="wrap">
+
+        <h3>Handle the watch time.</h3>
+        <form id="thetimeform" class="pure-form pure-form-aligned">
+          <fieldset>
+            <legend>Set the time.</legend>
+            <div class="pure-control-group">
+              <label for="settime">Time</label>
+              <input id="settime" type="text" name="settime">
+            </div>
+
+            <button type="button" id="settime-btn" class="hidden pure-button pure-button-primary">
+              Set
+            </button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Add some time.</legend>
+            <div class="pure-control-group">
+              <label for="addtime">Time</label>
+              <input id="addtime" type="text" name="addtime">
+            </div>
+
+            <button type="button" id="addtime-btn" class="hidden pure-button pure-button-primary">
+              Add
+            </button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Run the clock by adding the above set time every second.</legend>
+
+            <button type="button" id="runclock-btn" class="hidden pure-button pure-button-primary">
+              Run
+            </button>
+          </fieldset>
+        </form>
+
+      </div>
+    </section>
+  </section>
+
+  <section id="templates">
+    <div id="formrow">
+      <table>
+        <tbody>
+          <tr>
+            <td class="name">
+              <input type="text" data-type="name" name="" value="">
+            </td>
+            <td class="angle">
+              <input type="text" data-type="angle" name="" value="30">
+            </td>
+            <td class="edit">
+              <!-- <button type="button" data-type="add" class="add pure-button pure-button-secondary">+</button> -->
+              <button type="button" data-type="remove" class="remove pure-button pure-button-warning">-</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div id="output"></div>
+  </footer>
+
+  <script src="js/logic-min.js" type="text/javascript"></script>
+</body>
+
+</html>
